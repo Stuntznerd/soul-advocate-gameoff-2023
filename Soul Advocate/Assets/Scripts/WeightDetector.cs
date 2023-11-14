@@ -22,25 +22,31 @@ public class WeightDetector : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Get color of colliding object
-        newItem = collision.gameObject.GetComponent<Color>().color;
-
-        // Add the colliding object color to list of items
-        items += newItem;
-
-        // Update the weight value of the pan
-        weight += preferences[newItem];
+        if (collision.gameObject.CompareTag("Soul"))
+        {
+            // Get color of colliding object
+            string newItem = collision.gameObject.GetComponent<SoulType>().color;
+    
+            // Add the colliding object color to list of items
+            items.Add(newItem);
+    
+            // Update the weight value of the pan
+            weight += preferences[newItem];
+        }
 
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        items.Remove(collision.gameObject.GetComponent<Color>().color)
-
-        weight = 0
-        foreach (var item in items)
+        if (collision.gameObject.CompareTag("Soul"))
         {
-            weight += preferences[item]
+            items.Remove(collision.gameObject.GetComponent<SoulType>().color);
+    
+            weight = 0;
+            foreach (var item in items)
+            {
+                weight += preferences[item];
+            }
         }
     }
 }
