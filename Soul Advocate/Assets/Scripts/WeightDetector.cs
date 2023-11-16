@@ -35,10 +35,13 @@ public class WeightDetector : MonoBehaviour
     
             // Add the colliding object color to list of items
             items.Add(newItem);
-    
+            Debug.Log("items: " + items.ToString());
+
             // Update the weight value of the pan
             string newItemColor = newItem.GetComponent<Soul>().color;
             weight += preferences[newItemColor];
+            Debug.Log("weight: " + weight);
+
         }
 
     }
@@ -49,12 +52,15 @@ public class WeightDetector : MonoBehaviour
         {
             Debug.Log("Soul Exited");
             items.Remove(collision.gameObject);
+            Debug.Log("items: " + items.ToString());
+
     
             weight = 0;
             foreach (var item in items)
             {
                 weight += preferences[item.GetComponent<Soul>().color];
             }
+            Debug.Log("weight: " + weight);
         }
     }
 }

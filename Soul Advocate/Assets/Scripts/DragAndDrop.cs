@@ -6,7 +6,7 @@ public class DragAndDrop : MonoBehaviour
 {
     private bool isDragging = false;
     private Transform objectToDrag;
-    // private Rigidbody2D rb;
+    private Rigidbody2D rb;
     private Vector2 initialMousePos;
     private Vector2 initialObjectPosition;
 
@@ -16,8 +16,8 @@ public class DragAndDrop : MonoBehaviour
         {
             isDragging = true;
             objectToDrag = transform;
-            // rb = objectToDrag.GetComponent<Rigidbody2D>();
-            // rb.bodyType = RigidbodyType2D.Kinematic; // Set the body type to Kinematic while dragging.
+            rb = objectToDrag.GetComponent<Rigidbody2D>();
+            rb.bodyType = RigidbodyType2D.Kinematic; // Set the body type to Kinematic while dragging.
             initialMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             initialObjectPosition = objectToDrag.position;
         }
@@ -28,9 +28,10 @@ public class DragAndDrop : MonoBehaviour
         if (isDragging)
         {
             isDragging = false;
-            // rb.bodyType = RigidbodyType2D.Dynamic; // Reset the body type to Dynamic when not dragging.
+            rb.bodyType = RigidbodyType2D.Dynamic; // Reset the body type to Dynamic when not dragging.
             objectToDrag = null;
-            // rb = null;
+            rb = null;
+
         }
     }
 
