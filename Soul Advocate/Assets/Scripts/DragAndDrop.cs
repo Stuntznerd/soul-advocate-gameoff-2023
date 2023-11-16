@@ -46,7 +46,7 @@ public class DragAndDrop : MonoBehaviour
 
     private bool IsDraggable(GameObject obj)
     {
-        return obj.CompareTag("Draggable");
+        return obj.CompareTag("Soul");
     }
 }
 

@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class WeightDetector : MonoBehaviour
 {
-    private List<string> items = new List<string>();
+    private List<GameObject> items = new List<GameObject>();
     private int weight = 0;
-    private Dictionary<string, int> preferences = new Dictionary<string, int>();
+    private Dictionary<string, int> preferences = new Dictionary<string, int>() {
+        {"red", 4},
+        {"yellow", 3},
+        {"green", 2},
+        {"blue", 1}
+    };
 
     // Start is called before the first frame update
     void Start()
@@ -24,14 +29,16 @@ public class WeightDetector : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Soul"))
         {
+            Debug.Log("Soul Entered");
             // Get color of colliding object
-            string newItem = collision.gameObject.GetComponent<SoulType>().color;
+            GameObject newItem = collision.gameObject;
     
             // Add the colliding object color to list of items
             items.Add(newItem);
     
             // Update the weight value of the pan
-            weight += preferences[newItem];
+            string newItemColor = newItem.GetComponent<Soul>().color;
+            weight += preferences[newItemColor];
         }
 
     }
@@ -40,12 +47,13 @@ public class WeightDetector : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Soul"))
         {
-            items.Remove(collision.gameObject.GetComponent<SoulType>().color);
+            Debug.Log("Soul Exited");
+            items.Remove(collision.gameObject);
     
             weight = 0;
             foreach (var item in items)
             {
-                weight += preferences[item];
+                weight += preferences[item.GetComponent<Soul>().color];
             }
         }
     }
