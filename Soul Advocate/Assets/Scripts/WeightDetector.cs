@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class WeightDetector : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class WeightDetector : MonoBehaviour
         {"green", 2},
         {"blue", 1}
     };
+
+    public static event Action<int> OnWeightChange;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +43,9 @@ public class WeightDetector : MonoBehaviour
             // Update the weight value of the pan
             string newItemColor = newItem.GetComponent<Soul>().color;
             weight += preferences[newItemColor];
+
+            OnWeightChange?.Invoke(weight);
+
             Debug.Log("weight: " + weight);
 
         }
@@ -60,6 +66,9 @@ public class WeightDetector : MonoBehaviour
             {
                 weight += preferences[item.GetComponent<Soul>().color];
             }
+
+            OnWeightChange?.Invoke(weight);
+
             Debug.Log("weight: " + weight);
         }
     }
