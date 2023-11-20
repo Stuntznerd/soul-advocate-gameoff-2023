@@ -20,10 +20,10 @@ public class ScaleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void WeightChanged();
+    public void WeightChanged(int obj)
     {
         crossbarAngle = CompareWeights(leftWeight, rightWeight);
         OnScaleMeasurement?.Invoke(crossbarAngle);
@@ -32,35 +32,45 @@ public class ScaleManager : MonoBehaviour
     public int CompareWeights(int left, int right)
     {
 
-        if((left - right) >= 5) {
+        if ((left - right) >= 5)
+        {
             return -40;
         }
-        else if ((left - right) == 4) {
+        else if ((left - right) == 4)
+        {
             return -32;
         }
-        else if ((left - right) == 3) {
+        else if ((left - right) == 3)
+        {
             return -24;
         }
-        else if ((left - right) == 2) {
+        else if ((left - right) == 2)
+        {
             return -16;
         }
-        else if ((left - right) == 1) {
+        else if ((left - right) == 1)
+        {
             return -8;
         }
 
-        if ((right - left) >= 5) {
+        if ((right - left) >= 5)
+        {
             return 40;
         }
-        else if ((right - left) == 4) {
+        else if ((right - left) == 4)
+        {
             return 32;
         }
-        else if ((right - left) == 3) {
+        else if ((right - left) == 3)
+        {
             return 24;
         }
-        else if ((right - left) == 2) {
+        else if ((right - left) == 2)
+        {
             return 16;
         }
-        else if ((right - left) == 1) {
+        else if ((right - left) == 1)
+        {
             return 8;
         }
 

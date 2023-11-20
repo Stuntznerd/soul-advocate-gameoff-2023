@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,13 +11,11 @@ public class GameEvents : MonoBehaviour
     {
         current = this;
     }
-    
+
     public event Action OnWeightChange;
-    
+
     public void WeightChange()
     {
-        if (OnWeightChange != null) {
-            OnWeightChange();
-        }
+        OnWeightChange?.Invoke();
     }
 }

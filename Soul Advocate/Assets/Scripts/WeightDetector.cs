@@ -5,9 +5,9 @@ using System;
 
 public class WeightDetector : MonoBehaviour
 {
-    private List<GameObject> items = new List<GameObject>();
+    private List<GameObject> items = new();
     private int weight = 0;
-    private Dictionary<string, int> preferences = new Dictionary<string, int>() {
+    private Dictionary<string, int> preferences = new() {
         {"red", 4},
         {"yellow", 3},
         {"green", 2},
@@ -19,13 +19,13 @@ public class WeightDetector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -35,7 +35,7 @@ public class WeightDetector : MonoBehaviour
             Debug.Log("Soul Entered");
             // Get color of colliding object
             GameObject newItem = collision.gameObject;
-    
+
             // Add the colliding object color to list of items
             items.Add(newItem);
             Debug.Log("items: " + items.ToString());
@@ -60,7 +60,7 @@ public class WeightDetector : MonoBehaviour
             items.Remove(collision.gameObject);
             Debug.Log("items: " + items.ToString());
 
-    
+
             weight = 0;
             foreach (var item in items)
             {
