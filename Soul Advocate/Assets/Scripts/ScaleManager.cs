@@ -5,22 +5,28 @@ using System;
 
 public class ScaleManager : MonoBehaviour
 {
-    private int leftWeight;
-    private int rightWeight;
+    private int leftWeight = 0;
+    private int rightWeight = 0;
     private int crossbarAngle;
 
-    public static event Action<int>
+    public static event Action<int> OnScaleMeasurement;
 
     // Start is called before the first frame update
     void Start()
     {
-        WeightDetector.OnWeightChange += CompareWeights;
+        WeightDetector.OnWeightChange += WeightChanged;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void WeightChanged();
+    {
+        crossbarAngle = CompareWeights(leftWeight, rightWeight);
+        OnScaleMeasurement?.Invoke(crossbarAngle);
     }
 
     public int CompareWeights(int left, int right)
