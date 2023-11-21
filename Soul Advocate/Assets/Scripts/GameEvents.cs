@@ -11,12 +11,12 @@ public class GameEvents : MonoBehaviour
         current = this;
     }
     
-    public event Action OnWeightChange;
+    // public event Action OnWeightChange;
     
-    public void WeightChange()
-    {
-        if (OnWeightChange != null) {
-            OnWeightChange();
-        }
-    }
+    // public void WeightChange()
+    // {
+    //     if (OnWeightChange != null) {
+    //         OnWeightChange();
+    //     }
+    // }
 }

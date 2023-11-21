@@ -23,8 +23,16 @@ public class ScaleManager : MonoBehaviour
         
     }
 
-    public void WeightChanged();
+    public void WeightChanged(int weight, string side)
     {
+        if (side == "left")
+        {
+            leftWeight = weight;
+        } else if (side == "right")
+        {
+            rightWeight = weight;
+        }
+        
         crossbarAngle = CompareWeights(leftWeight, rightWeight);
         OnScaleMeasurement?.Invoke(crossbarAngle);
     }
@@ -33,35 +41,35 @@ public class ScaleManager : MonoBehaviour
     {
 
         if((left - right) >= 5) {
-            return -40;
+            return -30;
         }
         else if ((left - right) == 4) {
-            return -32;
-        }
-        else if ((left - right) == 3) {
             return -24;
         }
+        else if ((left - right) == 3) {
+            return -18;
+        }
         else if ((left - right) == 2) {
-            return -16;
+            return -12;
         }
         else if ((left - right) == 1) {
-            return -8;
+            return -6;
         }
 
         if ((right - left) >= 5) {
-            return 40;
+            return 30;
         }
         else if ((right - left) == 4) {
-            return 32;
-        }
-        else if ((right - left) == 3) {
             return 24;
         }
+        else if ((right - left) == 3) {
+            return 18;
+        }
         else if ((right - left) == 2) {
-            return 16;
+            return 12;
         }
         else if ((right - left) == 1) {
-            return 8;
+            return 6;
         }
 
         // left == right

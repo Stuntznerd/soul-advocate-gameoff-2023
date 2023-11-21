@@ -14,19 +14,22 @@ public class WeightDetector : MonoBehaviour
         {"blue", 1}
     };
 
-    public static event Action<int> OnWeightChange;
+    [SerializeField]
+    private string side = "left";
+
+    public static event Action<int, string> OnWeightChange;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    // void Start()
+    // {
         
-    }
+    // }
 
-    // Update is called once per frame
-    void Update()
-    {
+    // // Update is called once per frame
+    // void Update()
+    // {
         
-    }
+    // }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -44,7 +47,7 @@ public class WeightDetector : MonoBehaviour
             string newItemColor = newItem.GetComponent<Soul>().color;
             weight += preferences[newItemColor];
 
-            OnWeightChange?.Invoke(weight);
+            OnWeightChange?.Invoke(weight, side);
 
             Debug.Log("weight: " + weight);
 
@@ -67,7 +70,7 @@ public class WeightDetector : MonoBehaviour
                 weight += preferences[item.GetComponent<Soul>().color];
             }
 
-            OnWeightChange?.Invoke(weight);
+            OnWeightChange?.Invoke(weight, side);
 
             Debug.Log("weight: " + weight);
         }
