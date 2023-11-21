@@ -20,10 +20,11 @@ public class ScaleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void WeightChanged(int weight, string side)
+
     {
         if (side == "left")
         {
