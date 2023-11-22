@@ -23,7 +23,7 @@ public class WeightDetector : MonoBehaviour
 
     void Start()
     {
-
+        // ScaleManager.OnScaleMeasurement +=
     }
 
     // Update is called once per frame

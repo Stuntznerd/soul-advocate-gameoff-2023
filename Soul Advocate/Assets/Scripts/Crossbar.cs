@@ -6,6 +6,8 @@ public class Crossbar : MonoBehaviour
 {
     [SerializeField]
     private float smoothness = 1;
+    // [SerializeField]
+    // private float motorSpeed = 1;
     private int rotationAngle = 0;
     // Start is called before the first frame update
     void Start()
@@ -17,6 +19,7 @@ public class Crossbar : MonoBehaviour
     void Update()
     {
         Rotate(rotationAngle);
+        // RotateHJ(rotationAngle);
     }
 
     public void Rotate(int angle)
@@ -24,6 +27,28 @@ public class Crossbar : MonoBehaviour
         Quaternion targetRotation = Quaternion.Euler(0,0,angle);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, smoothness * Time.deltaTime);
     }
+
+    // public void RotateHJ(int targetAngle)
+    // {
+    //     HingeJoint2D hingeJoint = GetComponent<HingeJoint2D>();
+
+    //     if (hingeJoint == null)
+    //     {
+    //         return;
+    //     }
+
+    //     float currentAngle = hingeJoint.jointMotor.targetAngle;
+    //     float rotationDifference = targetAngle - currentAngle;
+
+    //     // Apply motor torque to rotate towards the target
+    //     hingeJoint.jointMotor.motorTorque = motorSpeed * Mathf.Sign(rotationDifference);
+
+    //     // Check for completion
+    //     if (Mathf.Abs(rotationDifference) < 0.1f)
+    //     {
+    //         hingeJoint.jointMotor.motorTorque = 0f;
+    //     }
+    // }
 
     public void setRotationAngle(int angle)
     {
