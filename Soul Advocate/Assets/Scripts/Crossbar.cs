@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class Crossbar : MonoBehaviour
 {
-    [SerializeField]
-    private float smoothness = 1;
-    // [SerializeField]
-    // private float motorSpeed = 1;
+    private float rotationSpeed;
     private int rotationAngle = 0;
     // Start is called before the first frame update
     void Start()
     {
-        ScaleManager.OnScaleMeasurement += setRotationAngle;
+        ScaleManager.OnScaleMeasurement += setRotationAngleAndSpeed;
     }
 
     // Update is called once per frame
@@ -25,7 +22,7 @@ public class Crossbar : MonoBehaviour
     public void Rotate(int angle)
     {
         Quaternion targetRotation = Quaternion.Euler(0,0,angle);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, smoothness * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
     // public void RotateHJ(int targetAngle)
@@ -50,8 +47,9 @@ public class Crossbar : MonoBehaviour
     //     }
     // }
 
-    public void setRotationAngle(int angle)
+    public void setRotationAngleAndSpeed(int angle, float speed)
     {
         this.rotationAngle = angle;
+        this.rotationSpeed = speed;
     }
 }

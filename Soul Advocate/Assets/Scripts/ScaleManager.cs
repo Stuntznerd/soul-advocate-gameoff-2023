@@ -9,7 +9,10 @@ public class ScaleManager : MonoBehaviour
     private int rightWeight = 0;
     private int crossbarAngle;
 
-    public static event Action<int> OnScaleMeasurement;
+    [SerializeField]
+    private float rotationSpeed = 1;
+
+    public static event Action<int, float> OnScaleMeasurement;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +38,7 @@ public class ScaleManager : MonoBehaviour
         }
         
         crossbarAngle = CompareWeights(leftWeight, rightWeight);
-        OnScaleMeasurement?.Invoke(crossbarAngle);
+        OnScaleMeasurement?.Invoke(crossbarAngle, rotationSpeed);
     }
 
     public int CompareWeights(int left, int right)
