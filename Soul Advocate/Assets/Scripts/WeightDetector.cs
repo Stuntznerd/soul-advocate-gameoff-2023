@@ -38,6 +38,7 @@ public class WeightDetector : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Soul"))
         {
+            collision.gameObject.transform.parent = transform;
             Debug.Log("Soul Entered");
             // Get color of colliding object
             GameObject newItem = collision.gameObject;
@@ -62,6 +63,8 @@ public class WeightDetector : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Soul"))
         {
+            collision.gameObject.transform.parent = null;
+            
             Debug.Log("Soul Exited");
             items.Remove(collision.gameObject);
             Debug.Log("items: " + items.ToString());
