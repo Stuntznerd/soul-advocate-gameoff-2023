@@ -5,6 +5,8 @@ using System;
 
 public class WeightDetector : MonoBehaviour
 {
+    private int rotationAngle;
+    private float rotationSpeed;
     private List<GameObject> items = new();
     private int weight = 0;
     private Dictionary<string, int> preferences = new() {
@@ -23,19 +25,20 @@ public class WeightDetector : MonoBehaviour
 
     void Start()
     {
-
+        ScaleManager.OnScaleMeasurement += setRotationAngleAndSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        CounterRotatePlate(rotationAngle);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Soul"))
         {
+            collision.gameObject.transform.parent = transform;
             Debug.Log("Soul Entered");
             // Get color of colliding object
             GameObject newItem = collision.gameObject;
@@ -60,6 +63,8 @@ public class WeightDetector : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Soul"))
         {
+            collision.gameObject.transform.parent = null;
+            
             Debug.Log("Soul Exited");
             items.Remove(collision.gameObject);
             Debug.Log("items: " + items.ToString());
@@ -75,5 +80,17 @@ public class WeightDetector : MonoBehaviour
 
             Debug.Log("weight: " + weight);
         }
+    }
+
+    private void CounterRotatePlate(int angle)
+    {
+        Quaternion targetRotation = Quaternion.Euler(0,0,angle);
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, rotationSpeed * Time.deltaTime);
+    }
+
+    private void setRotationAngleAndSpeed(int angle, float speed)
+    {
+        this.rotationAngle = angle * -1;
+        this.rotationSpeed = speed;
     }
 }

@@ -9,7 +9,10 @@ public class ScaleManager : MonoBehaviour
     private int rightWeight = 0;
     private int crossbarAngle;
 
-    public static event Action<int> OnScaleMeasurement;
+    [SerializeField]
+    private float rotationSpeed = 1;
+
+    public static event Action<int, float> OnScaleMeasurement;
 
     // Start is called before the first frame update
     void Start()
@@ -35,42 +38,42 @@ public class ScaleManager : MonoBehaviour
         }
         
         crossbarAngle = CompareWeights(leftWeight, rightWeight);
-        OnScaleMeasurement?.Invoke(crossbarAngle);
+        OnScaleMeasurement?.Invoke(crossbarAngle, rotationSpeed);
     }
 
     public int CompareWeights(int left, int right)
     {
 
         if((left - right) >= 5) {
-            return -30;
+            return 30;
         }
         else if ((left - right) == 4) {
-            return -24;
+            return 24;
         }
         else if ((left - right) == 3) {
-            return -18;
+            return 18;
         }
         else if ((left - right) == 2) {
-            return -12;
+            return 12;
         }
         else if ((left - right) == 1) {
-            return -6;
+            return 6;
         }
 
         if ((right - left) >= 5) {
-            return 30;
+            return -30;
         }
         else if ((right - left) == 4) {
-            return 24;
+            return -24;
         }
         else if ((right - left) == 3) {
-            return 18;
+            return -18;
         }
         else if ((right - left) == 2) {
-            return 12;
+            return -12;
         }
         else if ((right - left) == 1) {
-            return 6;
+            return -6;
         }
 
         // left == right

@@ -9,6 +9,7 @@ public class DragAndDrop : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 initialMousePos;
     private Vector2 initialObjectPosition;
+    private int initialSortingOrder;
 
     void OnMouseDown()
     {
@@ -20,6 +21,9 @@ public class DragAndDrop : MonoBehaviour
             rb.bodyType = RigidbodyType2D.Kinematic; // Set the body type to Kinematic while dragging.
             initialMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             initialObjectPosition = objectToDrag.position;
+
+            initialSortingOrder = objectToDrag.GetComponent<Renderer>().sortingOrder;
+            objectToDrag.GetComponent<Renderer>().sortingOrder = 1000;
         }
     }
 
@@ -29,6 +33,7 @@ public class DragAndDrop : MonoBehaviour
         {
             isDragging = false;
             rb.bodyType = RigidbodyType2D.Dynamic; // Reset the body type to Dynamic when not dragging.
+            objectToDrag.GetComponent<Renderer>().sortingOrder = initialSortingOrder;
             objectToDrag = null;
             rb = null;
 
