@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5248aa9b99e34199a08b1695e54e517, type: 3}
+  m_Name: green 4
+  m_EditorClassIdentifier: 
+  color: green
+  description: Eats dino nuggies
+  sprites:
+  - {fileID: 21300000, guid: b72f29e6691a443339ad0f09aa775b03, type: 3}
+  - {fileID: 21300000, guid: 030cee403a9eb4493962e5dbce232ea8, type: 3}
+  - {fileID: 21300000, guid: 5bf874288bff94af2bc46d37e3ba0f00, type: 3}
+  - {fileID: 21300000, guid: 4b841319ebd5d4913b341964a1ed516c, type: 3}
