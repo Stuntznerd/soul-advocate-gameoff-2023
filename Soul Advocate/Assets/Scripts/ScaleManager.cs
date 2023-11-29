@@ -43,40 +43,15 @@ public class ScaleManager : MonoBehaviour
 
     public int CompareWeights(int left, int right)
     {
+        int difference = left - right;
 
-        if((left - right) >= 5) {
-            return 30;
+        if (Math.Abs(difference) >= 5)
+        {
+            return 30 * Math.Sign(difference);
         }
-        else if ((left - right) == 4) {
-            return 24;
+        else
+        {
+            return 6 * difference;
         }
-        else if ((left - right) == 3) {
-            return 18;
-        }
-        else if ((left - right) == 2) {
-            return 12;
-        }
-        else if ((left - right) == 1) {
-            return 6;
-        }
-
-        if ((right - left) >= 5) {
-            return -30;
-        }
-        else if ((right - left) == 4) {
-            return -24;
-        }
-        else if ((right - left) == 3) {
-            return -18;
-        }
-        else if ((right - left) == 2) {
-            return -12;
-        }
-        else if ((right - left) == 1) {
-            return -6;
-        }
-
-        // left == right
-        return 0;
     }
 }
