@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 54580774}
   m_Layer: 0
   m_Name: Mat
-  m_TagString: Untagged
+  m_TagString: Mat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -239,7 +239,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -260,7 +260,7 @@ Transform:
   m_GameObject: {fileID: 54580773}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0395, y: -2.02, z: 0}
+  m_LocalPosition: {x: 0.01, y: -1.15, z: 0}
   m_LocalScale: {x: 4.4098053, y: 1.5920582, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -285,7 +285,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &436163956
 RectTransform:
   m_ObjectHideFlags: 0

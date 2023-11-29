@@ -7,9 +7,15 @@ public class DragAndDrop : MonoBehaviour
     private bool isDragging = false;
     private Transform objectToDrag;
     private Rigidbody2D rb;
-    private Vector2 initialMousePos;
-    private Vector2 initialObjectPosition;
+    private Vector3 initialMousePos;
+    private Vector3 initialObjectPosition;
     private int initialSortingOrder;
+    private Vector3 objPosAtSceneStart;
+    
+    void Start()
+    {
+        objPosAtSceneStart = transform.position;
+    }
 
     void OnMouseDown()
     {
@@ -24,6 +30,7 @@ public class DragAndDrop : MonoBehaviour
 
             initialSortingOrder = objectToDrag.GetComponent<Renderer>().sortingOrder;
             objectToDrag.GetComponent<Renderer>().sortingOrder = 1000;
+
         }
     }
 
@@ -34,18 +41,39 @@ public class DragAndDrop : MonoBehaviour
             isDragging = false;
             rb.bodyType = RigidbodyType2D.Dynamic; // Reset the body type to Dynamic when not dragging.
             objectToDrag.GetComponent<Renderer>().sortingOrder = initialSortingOrder;
+
+            // Perform raycast to check if the soul is dropped on a plate
+            RaycastHit2D hit = Physics2D.Raycast(objectToDrag.position, Vector2.zero, 10f, ~(1 << gameObject.layer));
+            if (hit.collider != null)
+            {
+                if (hit.collider.CompareTag("Plate"))
+                {
+                    // Do something when dropped on a plate
+                    // Debug.Log("Dropped on Plate!");
+                }
+                else if (!hit.collider.CompareTag("Mat"))
+                {
+                    // If not dropped on a plate or mat, reset to initial position on the mat
+                    objectToDrag.position = objPosAtSceneStart;
+                }
+
+                Debug.Log(hit.collider.ToString());
+            } else {
+                objectToDrag.position = objPosAtSceneStart;
+            }
+
             objectToDrag = null;
             rb = null;
-
         }
     }
+
 
     void Update()
     {
         if (isDragging)
         {
-            Vector2 currentMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 mouseDelta = currentMousePos - initialMousePos;
+            Vector3 currentMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 mouseDelta = currentMousePos - initialMousePos;
             objectToDrag.position = initialObjectPosition + mouseDelta;
         }
     }
@@ -55,4 +83,6 @@ public class DragAndDrop : MonoBehaviour
         return obj.CompareTag("Soul");
     }
 }
+
+
 
