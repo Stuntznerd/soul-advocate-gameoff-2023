@@ -323,7 +323,7 @@ GameObject:
   m_Component:
   - component: {fileID: 221249263}
   - component: {fileID: 221249264}
-  m_Layer: 2
+  m_Layer: 8
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -455,9 +455,9 @@ GameObject:
   - component: {fileID: 1540159307}
   - component: {fileID: 1540159309}
   - component: {fileID: 1540159310}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: RightPan
-  m_TagString: Untagged
+  m_TagString: Plate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -995,7 +995,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2017803143}
   - component: {fileID: 2017803144}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1082,9 +1082,9 @@ GameObject:
   - component: {fileID: 2035860907}
   - component: {fileID: 2035860912}
   - component: {fileID: 2035860913}
-  m_Layer: 2
+  m_Layer: 8
   m_Name: LeftPan
-  m_TagString: Untagged
+  m_TagString: Plate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
