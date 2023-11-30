@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
 
         if (angle == 0) {
             OnLevelComplete?.Invoke();
+            Debug.Log("level completed");
         }
 
         return;

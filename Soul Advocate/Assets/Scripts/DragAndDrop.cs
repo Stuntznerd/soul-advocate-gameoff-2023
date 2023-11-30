@@ -11,7 +11,7 @@ public class DragAndDrop : MonoBehaviour
     private Vector3 initialObjectPosition;
     private int initialSortingOrder;
     private Vector3 objPosAtSceneStart;
-    
+
     void Start()
     {
         objPosAtSceneStart = transform.position;
@@ -30,8 +30,14 @@ public class DragAndDrop : MonoBehaviour
 
             initialSortingOrder = objectToDrag.GetComponent<Renderer>().sortingOrder;
             objectToDrag.GetComponent<Renderer>().sortingOrder = 1000;
-
         }
+    }
+
+    void OnMouseDrag()
+    {
+        Vector3 currentMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mouseDelta = currentMousePos - initialMousePos;
+        objectToDrag.position = initialObjectPosition + mouseDelta;
     }
 
     void OnMouseUp()
@@ -58,7 +64,9 @@ public class DragAndDrop : MonoBehaviour
                 }
 
                 Debug.Log(hit.collider.ToString());
-            } else {
+            }
+            else
+            {
                 objectToDrag.position = objPosAtSceneStart;
             }
 
@@ -67,22 +75,12 @@ public class DragAndDrop : MonoBehaviour
         }
     }
 
-
-    void Update()
-    {
-        if (isDragging)
-        {
-            Vector3 currentMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3 mouseDelta = currentMousePos - initialMousePos;
-            objectToDrag.position = initialObjectPosition + mouseDelta;
-        }
-    }
-
     private bool IsDraggable(GameObject obj)
     {
         return obj.CompareTag("Soul");
     }
 }
+
 
 
 
