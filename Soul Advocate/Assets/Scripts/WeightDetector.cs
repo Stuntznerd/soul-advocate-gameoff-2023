@@ -20,6 +20,7 @@ public class WeightDetector : MonoBehaviour
     private string side = "left";
 
     public static event Action<int, string> OnWeightChange;
+    public static event Action OnGemDroppedOnScale;
 
     // Start is called before the first frame update
 
@@ -39,22 +40,18 @@ public class WeightDetector : MonoBehaviour
         if (collision.gameObject.CompareTag("Soul"))
         {
             collision.gameObject.transform.parent = transform;
-            Debug.Log("Soul Entered");
             // Get color of colliding object
             GameObject newItem = collision.gameObject;
 
             // Add the colliding object color to list of items
             items.Add(newItem);
-            Debug.Log("items: " + items.ToString());
 
             // Update the weight value of the pan
             string newItemColor = newItem.GetComponent<Soul>().color;
             weight += preferences[newItemColor];
 
+            OnGemDroppedOnScale?.Invoke();
             OnWeightChange?.Invoke(weight, side);
-
-            Debug.Log("weight: " + weight);
-
         }
 
     }
@@ -65,10 +62,7 @@ public class WeightDetector : MonoBehaviour
         {
             collision.gameObject.transform.parent = null;
             
-            Debug.Log("Soul Exited");
             items.Remove(collision.gameObject);
-            Debug.Log("items: " + items.ToString());
-
 
             weight = 0;
             foreach (var item in items)
@@ -77,8 +71,6 @@ public class WeightDetector : MonoBehaviour
             }
 
             OnWeightChange?.Invoke(weight, side);
-
-            Debug.Log("weight: " + weight);
         }
     }
 

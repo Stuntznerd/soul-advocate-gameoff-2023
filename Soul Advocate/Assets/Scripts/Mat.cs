@@ -8,10 +8,12 @@ public class Mat : MonoBehaviour
     private List<GameObject> souls = new();
     public static event Action OnMatEmptied;
     public static event Action OnMatFull;
+    public static event Action OnGemDroppedOnMat;
 
     void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("Soul")) {
             souls.Add(collision.gameObject);
+            OnGemDroppedOnMat?.Invoke();
         }
 
         if (souls.Count > 0) {
