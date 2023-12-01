@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("New Scene Started");
         ScaleManager.OnScaleMeasurement += CheckWin;
         Mat.OnMatEmptied += SetMatEmptyTrue;
         Mat.OnMatFull += SetMatEmptyFalse;

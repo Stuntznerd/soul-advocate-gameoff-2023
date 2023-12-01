@@ -5,16 +5,31 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-
-  - enabled: 1
-    path: Assets/Scenes/Scale.unity
-    guid: eb5a4d29c32a54d349c6bd91c5b7e1e5
   - enabled: 1
     path: Assets/Scenes/Title.unity
     guid: c63087b811ae33d408abbc4cdd00fba6
-
-#   - enabled: 0
-#     path: Assets/Scenes/SampleScene.unity
-#     guid: 8c9cfa26abfee488c85f1582747f6a02
-
+  - enabled: 1
+    path: Assets/Scenes/L1-Loki&Hercules.unity
+    guid: 45412aa31b333474ba683e3d9c4f9ec1
+  - enabled: 1
+    path: Assets/Scenes/L2-Hercules&Sekhmet.unity
+    guid: d0eade917b0214f27b1f9a48faa8c96e
+  - enabled: 1
+    path: Assets/Scenes/L3-Loki&Sekhmet.unity
+    guid: bca0bd9472672489587395b6c5860828
+  - enabled: 1
+    path: Assets/Scenes/L4-Loki&Azathoth.unity
+    guid: e3926bebd54964e0e99ba00cb1b29d05
+  - enabled: 1
+    path: Assets/Scenes/L5-Quetz&Hercules.unity
+    guid: 46e17f5b577c2471d85c8f5b4a795cb5
+  - enabled: 1
+    path: Assets/Scenes/L6-Sekhmet&Quetz.unity
+    guid: cc5906fb4464040949594f594e4d0fe4
+  - enabled: 1
+    path: Assets/Scenes/L7-Azathoth&Azathoth.unity
+    guid: 8aaa933bde20e482389fdaf1d5c9c7d3
+  - enabled: 1
+    path: Assets/Scenes/credit scene.unity
+    guid: b9fa06133ebe64394bff48f0bd749894
   m_configObjects: {}
