@@ -9,15 +9,13 @@ public class WeightDetector : MonoBehaviour
     private float rotationSpeed;
     private List<GameObject> items = new();
     private int weight = 0;
-    private Dictionary<string, int> preferences = new() {
-        {"red", 4},
-        {"yellow", 3},
-        {"green", 2},
-        {"blue", 1}
-    };
+    private Dictionary<string, int> preferences;
 
     [SerializeField]
     private string side = "left";
+
+    public string[] keys;
+    public int[] values;
 
     public static event Action<int, string, string> OnWeightChange;
     public static event Action OnGemDroppedOnScale;
@@ -26,6 +24,13 @@ public class WeightDetector : MonoBehaviour
 
     void Start()
     {
+        preferences = new() {
+            {keys[0], values[0]},
+            {keys[1], values[1]},
+            {keys[2], values[2]},
+            {keys[3], values[3]}
+        };
+
         ScaleManager.OnScaleMeasurement += setRotationAngleAndSpeed;
     }
 
