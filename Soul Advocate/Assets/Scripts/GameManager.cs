@@ -6,6 +6,7 @@ using System;
 public class GameManager : MonoBehaviour
 {
     private bool matEmpty = false;
+    private int angle;
     public static event Action OnLevelComplete;
     // Start is called before the first frame update
     void Start()
@@ -15,9 +16,13 @@ public class GameManager : MonoBehaviour
         Mat.OnMatFull += SetMatEmptyFalse;
     }
 
-    public void CheckWin(int angle, float _)
+    public void CheckWin(int angle, float _, string motion)
     {
         if (!matEmpty) {
+            return;
+        }
+
+        if (motion == "picked") {
             return;
         }
 
@@ -25,8 +30,6 @@ public class GameManager : MonoBehaviour
             OnLevelComplete?.Invoke();
             Debug.Log("level completed");
         }
-
-        return;
     }
 
     public void SetMatEmptyTrue() {
@@ -36,4 +39,5 @@ public class GameManager : MonoBehaviour
     public void SetMatEmptyFalse() {
         matEmpty = false;
     }
+
 }

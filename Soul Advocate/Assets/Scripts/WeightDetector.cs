@@ -19,7 +19,7 @@ public class WeightDetector : MonoBehaviour
     [SerializeField]
     private string side = "left";
 
-    public static event Action<int, string> OnWeightChange;
+    public static event Action<int, string, string> OnWeightChange;
     public static event Action OnGemDroppedOnScale;
 
     // Start is called before the first frame update
@@ -51,7 +51,7 @@ public class WeightDetector : MonoBehaviour
             weight += preferences[newItemColor];
 
             OnGemDroppedOnScale?.Invoke();
-            OnWeightChange?.Invoke(weight, side);
+            OnWeightChange?.Invoke(weight, side, "dropped");
         }
 
     }
@@ -70,7 +70,7 @@ public class WeightDetector : MonoBehaviour
                 weight += preferences[item.GetComponent<Soul>().color];
             }
 
-            OnWeightChange?.Invoke(weight, side);
+            OnWeightChange?.Invoke(weight, side, "picked");
         }
     }
 
@@ -80,7 +80,7 @@ public class WeightDetector : MonoBehaviour
         transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
-    private void setRotationAngleAndSpeed(int angle, float speed)
+    private void setRotationAngleAndSpeed(int angle, float speed, string _)
     {
         this.rotationAngle = angle * -1;
         this.rotationSpeed = speed;
