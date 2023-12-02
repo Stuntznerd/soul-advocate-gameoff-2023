@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class StartGame : MonoBehaviour
 {
-    public string LevelName;
+    public static event Action OnStartButtonPressed;
 
     public void LoadLevel()
     {
-        SceneManager.LoadScene(LevelName);
+        OnStartButtonPressed?.Invoke();
     }
 }

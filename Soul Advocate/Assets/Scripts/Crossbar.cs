@@ -47,7 +47,7 @@ public class Crossbar : MonoBehaviour
     //     }
     // }
 
-    public void setRotationAngleAndSpeed(int angle, float speed)
+    public void setRotationAngleAndSpeed(int angle, float speed, string _)
     {
         this.rotationAngle = angle;
         this.rotationSpeed = speed;

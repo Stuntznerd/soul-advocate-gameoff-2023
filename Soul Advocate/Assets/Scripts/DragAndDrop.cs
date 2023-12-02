@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class DragAndDrop : MonoBehaviour
 {
@@ -11,7 +12,8 @@ public class DragAndDrop : MonoBehaviour
     private Vector3 initialObjectPosition;
     private int initialSortingOrder;
     private Vector3 objPosAtSceneStart;
-    
+    public static event Action OnPickUpGem;
+
     void Start()
     {
         objPosAtSceneStart = transform.position;
@@ -28,10 +30,17 @@ public class DragAndDrop : MonoBehaviour
             initialMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             initialObjectPosition = objectToDrag.position;
 
-            initialSortingOrder = objectToDrag.GetComponent<Renderer>().sortingOrder;
+            initialSortingOrder = 6;
             objectToDrag.GetComponent<Renderer>().sortingOrder = 1000;
-
+            OnPickUpGem?.Invoke();
         }
+    }
+
+    void OnMouseDrag()
+    {
+        Vector3 currentMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mouseDelta = currentMousePos - initialMousePos;
+        objectToDrag.position = initialObjectPosition + mouseDelta;
     }
 
     void OnMouseUp()
@@ -48,17 +57,16 @@ public class DragAndDrop : MonoBehaviour
             {
                 if (hit.collider.CompareTag("Plate"))
                 {
-                    // Do something when dropped on a plate
-                    // Debug.Log("Dropped on Plate!");
+                    objectToDrag.GetComponent<Renderer>().sortingOrder = 0;
                 }
                 else if (!hit.collider.CompareTag("Mat"))
                 {
                     // If not dropped on a plate or mat, reset to initial position on the mat
                     objectToDrag.position = objPosAtSceneStart;
                 }
-
-                Debug.Log(hit.collider.ToString());
-            } else {
+            }
+            else
+            {
                 objectToDrag.position = objPosAtSceneStart;
             }
 
@@ -67,22 +75,12 @@ public class DragAndDrop : MonoBehaviour
         }
     }
 
-
-    void Update()
-    {
-        if (isDragging)
-        {
-            Vector3 currentMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3 mouseDelta = currentMousePos - initialMousePos;
-            objectToDrag.position = initialObjectPosition + mouseDelta;
-        }
-    }
-
     private bool IsDraggable(GameObject obj)
     {
         return obj.CompareTag("Soul");
     }
 }
+
 
 
 

@@ -9,22 +9,28 @@ public class WeightDetector : MonoBehaviour
     private float rotationSpeed;
     private List<GameObject> items = new();
     private int weight = 0;
-    private Dictionary<string, int> preferences = new() {
-        {"red", 4},
-        {"yellow", 3},
-        {"green", 2},
-        {"blue", 1}
-    };
+    private Dictionary<string, int> preferences;
 
     [SerializeField]
     private string side = "left";
 
-    public static event Action<int, string> OnWeightChange;
+    public string[] keys;
+    public int[] values;
+
+    public static event Action<int, string, string> OnWeightChange;
+    public static event Action OnGemDroppedOnScale;
 
     // Start is called before the first frame update
 
     void Start()
     {
+        preferences = new() {
+            {keys[0], values[0]},
+            {keys[1], values[1]},
+            {keys[2], values[2]},
+            {keys[3], values[3]}
+        };
+
         ScaleManager.OnScaleMeasurement += setRotationAngleAndSpeed;
     }
 
@@ -39,22 +45,18 @@ public class WeightDetector : MonoBehaviour
         if (collision.gameObject.CompareTag("Soul"))
         {
             collision.gameObject.transform.parent = transform;
-            Debug.Log("Soul Entered");
             // Get color of colliding object
             GameObject newItem = collision.gameObject;
 
             // Add the colliding object color to list of items
             items.Add(newItem);
-            Debug.Log("items: " + items.ToString());
 
             // Update the weight value of the pan
             string newItemColor = newItem.GetComponent<Soul>().color;
             weight += preferences[newItemColor];
 
-            OnWeightChange?.Invoke(weight, side);
-
-            Debug.Log("weight: " + weight);
-
+            OnGemDroppedOnScale?.Invoke();
+            OnWeightChange?.Invoke(weight, side, "dropped");
         }
 
     }
@@ -65,10 +67,7 @@ public class WeightDetector : MonoBehaviour
         {
             collision.gameObject.transform.parent = null;
             
-            Debug.Log("Soul Exited");
             items.Remove(collision.gameObject);
-            Debug.Log("items: " + items.ToString());
-
 
             weight = 0;
             foreach (var item in items)
@@ -76,9 +75,7 @@ public class WeightDetector : MonoBehaviour
                 weight += preferences[item.GetComponent<Soul>().color];
             }
 
-            OnWeightChange?.Invoke(weight, side);
-
-            Debug.Log("weight: " + weight);
+            OnWeightChange?.Invoke(weight, side, "picked");
         }
     }
 
@@ -88,7 +85,7 @@ public class WeightDetector : MonoBehaviour
         transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
-    private void setRotationAngleAndSpeed(int angle, float speed)
+    private void setRotationAngleAndSpeed(int angle, float speed, string _)
     {
         this.rotationAngle = angle * -1;
         this.rotationSpeed = speed;
