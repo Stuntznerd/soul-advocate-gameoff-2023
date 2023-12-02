@@ -9,6 +9,7 @@ public class SFXGrab : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Start called");
         audioSource = GetComponent<AudioSource>();
         DragAndDrop.OnPickUpGem += PlayGrabSoundEffect;
     }

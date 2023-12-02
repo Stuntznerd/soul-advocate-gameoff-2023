@@ -7,15 +7,18 @@ public class LevelLoader : MonoBehaviour
 {
     public Animator transition;
     public float transTime = 1f;
-    public float testTime = 20f;
+    // public float testTime = 20f;
     void Start() {
-        StartCoroutine(TestLoad(SceneManager.GetActiveScene().buildIndex + 1));
-        // GameManager.OnLevelComplete += LoadNextLevel;
+        // StartCoroutine(TestLoad(SceneManager.GetActiveScene().buildIndex + 1));
+        GameManager.OnLevelComplete += LoadNextLevel;
         // StartGame.OnStartButtonPressed += LoadNextLevel;
+        Debug.Log("Loaded Scenes: " + SceneManager.loadedSceneCount.ToString());
+        Debug.Log("Scenes: " + SceneManager.sceneCount.ToString());
     }
 
     public void LoadNextLevel() {
-        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+        // StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+        StartCoroutine(AsyncLoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
     }
     
     IEnumerator LoadLevel(int levelIndex) {
@@ -26,13 +29,26 @@ public class LevelLoader : MonoBehaviour
         SceneManager.LoadScene(levelIndex);
     }
 
-    IEnumerator TestLoad(int levelIndex) {
-        yield return new WaitForSeconds(testTime);
-        
+    // IEnumerator TestLoad(int levelIndex) {
+    //     yield return new WaitForSeconds(testTime);
+
+    //     transition.SetTrigger("Start");
+
+    //     yield return new WaitForSeconds(transTime);
+
+    //     SceneManager.LoadScene(levelIndex);
+    // }
+
+    IEnumerator AsyncLoadLevel(int levelIndex) {
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(transTime);
 
-        SceneManager.LoadScene(levelIndex);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(levelIndex);
+
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
     }
 }
