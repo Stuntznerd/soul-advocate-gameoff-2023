@@ -41,4 +41,10 @@ public class GameManager : MonoBehaviour
         matEmpty = false;
     }
 
+    void OnDisable() {
+        ScaleManager.OnScaleMeasurement -= CheckWin;
+        Mat.OnMatEmptied -= SetMatEmptyTrue;
+        Mat.OnMatFull -= SetMatEmptyFalse;
+    }
+
 }

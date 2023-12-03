@@ -48,4 +48,8 @@ public class ScaleManager : MonoBehaviour
             return 6 * difference;
         }
     }
+
+    void OnDisable() {
+        WeightDetector.OnWeightChange -= WeightChanged;
+    }
 }

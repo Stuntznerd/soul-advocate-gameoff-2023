@@ -90,4 +90,8 @@ public class WeightDetector : MonoBehaviour
         this.rotationAngle = angle * -1;
         this.rotationSpeed = speed;
     }
+
+    void OnDisable() {
+        ScaleManager.OnScaleMeasurement -= setRotationAngleAndSpeed;
+    }
 }
