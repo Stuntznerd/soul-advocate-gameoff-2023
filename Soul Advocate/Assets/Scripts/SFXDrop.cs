@@ -42,4 +42,9 @@ public class SFXDrop : MonoBehaviour
         DragAndDrop.OnPickUpGem -= SubscribeToGemDroppedOnMat;
     }
 
+    void OnDisable() {
+        WeightDetector.OnGemDroppedOnScale -= PlayRandomSoundEffect;
+        Mat.OnGemDroppedOnMat -= PlayMatSoundEffect;
+    }
+
 }

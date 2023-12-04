@@ -192,6 +192,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: fb083656ea4da47379b1cb93986cf566, type: 3}
+    - target: {fileID: 4869533565090800996, guid: f7a91cad7de474cfaa92a4cb9f6e74ea, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5392767779509356164, guid: f7a91cad7de474cfaa92a4cb9f6e74ea, type: 3}
       propertyPath: audioSource
       value: 

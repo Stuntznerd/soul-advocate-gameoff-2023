@@ -19,4 +19,8 @@ public class BGM : MonoBehaviour
         }
     }
 
+    void OnDisable() {
+        GameManager.OnLevelComplete -= StopBGM;
+    }
+
 }

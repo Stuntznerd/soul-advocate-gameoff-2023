@@ -52,4 +52,8 @@ public class Crossbar : MonoBehaviour
         this.rotationAngle = angle;
         this.rotationSpeed = speed;
     }
+
+    void OnDisable() {
+        ScaleManager.OnScaleMeasurement -= setRotationAngleAndSpeed;
+    }
 }

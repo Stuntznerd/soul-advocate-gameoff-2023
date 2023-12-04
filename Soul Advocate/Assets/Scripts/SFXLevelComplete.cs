@@ -19,4 +19,8 @@ public class SFXLevelComplete : MonoBehaviour
         audioSource.Play();
     }
 
+    void OnDisable() {
+        GameManager.OnLevelComplete -= PlayLevelCompleteSoundEffect;
+    }
+
 }

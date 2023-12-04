@@ -20,4 +20,8 @@ public class SFXGrab : MonoBehaviour
         audioSource.Play();
     }
 
+    void OnDisable() {
+        DragAndDrop.OnPickUpGem -= PlayGrabSoundEffect;
+    }
+
 }
