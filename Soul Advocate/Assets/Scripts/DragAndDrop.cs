@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using DialogueEditor;
 
 public class DragAndDrop : MonoBehaviour
 {
     private bool isDragging = false;
+    private bool isInDialogue = false;
     private Transform objectToDrag;
     private Rigidbody2D rb;
     private Vector3 initialMousePos;
@@ -17,6 +19,13 @@ public class DragAndDrop : MonoBehaviour
     void Start()
     {
         objPosAtSceneStart = transform.position;
+        DialogueEditor.ConversationManager.OnConversationStarted += SetIsInDialogueTrue;
+        DialogueEditor.ConversationManager.OnConversationEnded += SetIsInDialogueFalse;
+    }
+
+    void OnDisable() {
+        DialogueEditor.ConversationManager.OnConversationStarted -= SetIsInDialogueTrue;
+        DialogueEditor.ConversationManager.OnConversationEnded -= SetIsInDialogueFalse;
     }
 
     void OnMouseDown()
@@ -77,7 +86,18 @@ public class DragAndDrop : MonoBehaviour
 
     private bool IsDraggable(GameObject obj)
     {
+        if(isInDialogue) {
+            return false;
+        }
         return obj.CompareTag("Soul");
+    }
+
+    private void SetIsInDialogueTrue() {
+        this.isInDialogue = true;
+    }
+
+    private void SetIsInDialogueFalse() {
+        this.isInDialogue = false;
     }
 }
 

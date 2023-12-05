@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 386bec8cd36087d4f9615f7857efea2b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Dimmer: {fileID: 3216007433143529145, guid: 1d48feb1cf04aec499db38c5c2abd76c, type: 3}
+  - god_l: {instanceID: 0}
+  - god_r: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
