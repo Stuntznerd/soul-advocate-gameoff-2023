@@ -2,19 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DialogueEditor;
 
 public class LevelLoader : MonoBehaviour
 {
     public Animator transition;
     public float transTime = 1f;
+
     void Start() {
-        GameManager.OnLevelComplete += LoadNextLevel;
         StartGame.OnStartButtonPressed += LoadNextLevel;
     }
 
     public void LoadNextLevel() {
-        // GameManager.OnLevelComplete -= LoadNextLevel;
-        // StartGame.OnStartButtonPressed -= LoadNextLevel;
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
     }
     
@@ -40,7 +39,11 @@ public class LevelLoader : MonoBehaviour
     }
 
     void OnDisable() {
-        GameManager.OnLevelComplete -= LoadNextLevel;
         StartGame.OnStartButtonPressed -= LoadNextLevel;
+        DialogueEditor.ConversationManager.OnConversationEnded -=LoadNextLevel;
+    }
+
+    public void SubscribeToOnConversationEnded() {
+        DialogueEditor.ConversationManager.OnConversationEnded += LoadNextLevel;
     }
 }
